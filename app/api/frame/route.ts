@@ -26,7 +26,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   let attestationUids = [];
   for (let i = 0; i < accountAddresses.length; i++) {
-    let uid = await readAttestationUid(accountAddresses[i]);
+    let uid;
+    try {
+      uid = await readAttestationUid(accountAddresses[i]);
+    } catch (err) {
+      console.log(err);
+    }
+
     if (uid != zeroBytes32) {
       attestationUids.push(uid);
     }
@@ -35,7 +41,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   let isVerified = false;
   if (attestationUids.length >= 0) {
     for (let i = 0; i < attestationUids.length; i++) {
-      isVerified = await isValidAttestation(attestationUids[i]);
+      try {
+        isVerified = await isValidAttestation(attestationUids[i] as string);
+      } catch (err) {
+        console.log(err);
+      }
+
       if (isVerified) {
         break;
       }
