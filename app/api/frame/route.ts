@@ -5,10 +5,10 @@ import {
 } from "@coinbase/onchainkit";
 import { NextRequest, NextResponse } from "next/server";
 import { NEXT_PUBLIC_URL } from "../../config";
-import { isEasVerified } from "../../eas/eas";
+import { isValidAttestation } from "../../eas/eas";
 import { readAttestationUid } from "../../verifications/indexer";
 
-const zeroAddress =
+const zeroBytes32 =
   "0x0000000000000000000000000000000000000000000000000000000000000000";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
@@ -24,18 +24,18 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     accountAddresses = message.interactor.verified_accounts;
   }
 
-  let attestations = [];
+  let attestationUids = [];
   for (let i = 0; i < accountAddresses.length; i++) {
-    let attestationUid = await readAttestationUid(accountAddresses[i]);
-    if (attestationUid != zeroAddress) {
-      attestations.push(attestationUid);
+    let uid = await readAttestationUid(accountAddresses[i]);
+    if (uid != zeroBytes32) {
+      attestationUids.push(uid);
     }
   }
 
   let isVerified = false;
-  if (attestations.length >= 0) {
-    for (let i = 0; i < attestations.length; i++) {
-      isVerified = await isEasVerified(attestations[i]);
+  if (attestationUids.length >= 0) {
+    for (let i = 0; i < attestationUids.length; i++) {
+      isVerified = await isValidAttestation(attestationUids[i]);
       if (isVerified) {
         break;
       }
