@@ -4,9 +4,10 @@ import { ethers } from "ethers";
 const EASContractAddress = "0x4200000000000000000000000000000000000021"; // base-mainnet predeploy
 
 export function isEasVerified(address: string): Promise<boolean> {
-  const eas = new EAS(EASContractAddress);
+  const easContract = new EAS(EASContractAddress);
 
   const provider = new ethers.JsonRpcProvider("https://mainnet.base.org");
+  const eas = easContract.connect(provider);
 
   return eas.getAttestation(address).then((attestation) => {
     if (

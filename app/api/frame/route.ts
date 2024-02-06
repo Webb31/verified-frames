@@ -6,7 +6,7 @@ import {
 import { NextRequest, NextResponse } from "next/server";
 import { NEXT_PUBLIC_URL } from "../../config";
 import { isEasVerified } from "../../eas/eas";
-import { readAttestationUid } from "../../verifications/verifications";
+import { readAttestationUid } from "../../verifications/indexer";
 
 const zeroAddress =
   "0x0000000000000000000000000000000000000000000000000000000000000000";
