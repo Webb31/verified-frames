@@ -1,0 +1,3 @@
+[submodule "verified-frames/lib/forge-std"]
+	path = verified-frames/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
