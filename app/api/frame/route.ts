@@ -16,10 +16,14 @@ const zeroBytes32 =
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   let accountAddresses: string[] | undefined = [];
 
+  console.log("before neynar");
   const body: FrameRequest = await req.json();
+  console.log(body);
   const { isValid, message } = await getFrameMessage(body, {
     neynarApiKey: "NEYNAR_ONCHAIN_KIT",
   });
+
+  console.log("after neynar");
 
   if (isValid) {
     accountAddresses = message.interactor.verified_accounts;
@@ -50,14 +54,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   const fid = message?.interactor.fid;
-  kv.set(`${fid}`, JSON.stringify(verifiedAddresses));
+  // kv.set(`${fid}`, JSON.stringify(verifiedAddresses));
 
   // happy path: has at least 1 verified address
   if (verifiedAddresses.length > 0) {
     // convert verified addresses to ens names if an ens record exists
-    getAddressesWithEns(verifiedAddresses).then((verifiedAddressesWithEns) => {
-      verifiedAddresses = verifiedAddressesWithEns;
-    });
+    // getAddressesWithEns(verifiedAddresses).then((verifiedAddressesWithEns) => {
+    //   verifiedAddresses = verifiedAddressesWithEns;
+    // });
 
     const imageUrl = `${NEXT_PUBLIC_URL}/api/image?fid=${fid}`;
 

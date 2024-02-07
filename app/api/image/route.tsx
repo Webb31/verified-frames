@@ -9,8 +9,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const fontPath = join(process.cwd(), 'Roboto-Regular.ttf')
 let fontData = fs.readFileSync(fontPath)
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log(req.query['id'])
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  console.log("taco", req.query['fid'])
   const svg = await satori(
     <div style={{ display: 'flex', color: "black" }}>Verified Addresses</div>,
     {
