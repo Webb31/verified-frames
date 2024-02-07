@@ -3,25 +3,36 @@ import sharp from 'sharp';
 import * as fs from "fs";
 import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from "next/server";
+import { kv } from "@vercel/kv";
 
 
 const fontPath = join(process.cwd(), 'Roboto-Regular.ttf')
 let fontData = fs.readFileSync(fontPath)
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  console.log("taco", req.query['fid'])
+export async function GET(req: NextRequest): Promise<Response> {
+  const url = new URL(req.url);
+  const fid = url.searchParams.get('fid');
+  const verifiedAddresses = await kv.get(fid as string);
+  let addressesList: string[] = [];
+
+  verifiedAddresses.forEach((address, index) => {
+    addressesList.push(<li key={index}>{address}</li>);
+  });
   const svg = await satori(
-    <div style={{ display: 'flex', color: "black" }}>Verified Addresses</div>,
+    <div style={{ marginTop: '200px', display: 'flex', flexDirection: 'column', color: "white" }}>Verified Addresses:
+      <ul>{addressesList}</ul>
+    </div>
+    ,
     {
-      width: 600,
-      height: 400,
+      width: 1000,
+      height: 1000,
       fonts: [
         {
           name: "Roboto",
           // Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
           data: fontData,
-          weight: 400,
+          weight: 700,
           style: "normal",
         },
       ],
@@ -35,7 +46,8 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
   .toBuffer();
 
   // Set the content type to PNG and send the response
-  res.setHeader('Content-Type', 'image/png');
-  res.setHeader('Cache-Control', 'max-age=10');
-  res.send(pngBuffer);
+  let res = new NextResponse(
+    pngBuffer
+  )
+  return res;
 }

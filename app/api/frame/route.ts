@@ -53,15 +53,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     }
   }
 
-  const fid = message?.interactor.fid;
-  // kv.set(`${fid}`, JSON.stringify(verifiedAddresses));
-
   // happy path: has at least 1 verified address
   if (verifiedAddresses.length > 0) {
     // convert verified addresses to ens names if an ens record exists
-    // getAddressesWithEns(verifiedAddresses).then((verifiedAddressesWithEns) => {
-    //   verifiedAddresses = verifiedAddressesWithEns;
-    // });
+    getAddressesWithEns(verifiedAddresses).then((verifiedAddressesWithEns) => {
+      verifiedAddresses = verifiedAddressesWithEns;
+    });
+
+    const fid = message?.interactor.fid;
+    kv.set(`${fid}`, JSON.stringify(verifiedAddresses));
 
     const imageUrl = `${NEXT_PUBLIC_URL}/api/image?fid=${fid}`;
 
