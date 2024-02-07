@@ -14,19 +14,44 @@ export async function GET(req: NextRequest): Promise<Response> {
   const fid = url.searchParams.get('fid');
   const verifiedAddresses: string[] | null = await kv.get(fid as string);
 
+  if (verifiedAddresses === null || fid == null) {
+    return new NextResponse();
+  }
+
+  // zero out fid in case user disconnects addresses
+  kv.del(fid)
+
   const svg = await satori(
-    <div style={{ marginLeft: '200px', marginTop: '200px', display: 'flex', flexDirection: 'column', color: "white" }}>Verified Addresses:
-      <p>{(verifiedAddresses as string[]).join(", ")}</p>
+      <div style={{
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        display: 'flex',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'transparent',
+        padding: 50,
+        lineHeight: 1.2,
+        fontSize: 24
+      }}
+      >
+      <div style={{ display: 'flex' }}>
+        <h2 style={{ textAlign: 'center', color: 'lightgray' }}>Verified Addresses</h2>
+        {verifiedAddresses.map((address, index) => (
+          <div style={{ fontSize: 15 }} key={index}>
+            {address}
+          </div>
+        ))}
+      </div>
     </div>
     ,
     {
-      width: 700,
-      height: 700,
+      width: 600,
+      height: 400,
       fonts: [
         {
           name: "Roboto",
           data: fontData,
-          weight: 900,
+          weight: 400,
           style: "normal",
         },
       ],
