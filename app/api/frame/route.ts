@@ -58,8 +58,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       getFrameHtmlResponse({
         buttons: [
           {
-            label:
-              "Congrats! You are verified. Click to verify more addresses!",
+            label: `${verifiedAddresses.join(", ")}`,
             action: "post_redirect",
           },
         ],
