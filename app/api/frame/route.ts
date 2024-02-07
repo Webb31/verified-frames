@@ -62,8 +62,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             label: `You are eligible! Claim your NFT now!`,
           },
         ],
-        image:
-          "https://static-assets.coinbase.com/attestations/attestation-circle.png",
+        image: `${NEXT_PUBLIC_URL}/attestation-circle.png`,
         // TODO: implement minting or some other gated experience
         post_url: `${NEXT_PUBLIC_URL}/api/mint`,
       })
@@ -79,8 +78,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           action: "post_redirect",
         },
       ],
-      image:
-        "https://static-assets.coinbase.com/attestations/attestation-circle.png",
+      image: `${NEXT_PUBLIC_URL}/attestation-circle.png`,
       post_url: `https://coinbase.com/onchain-verify`,
     })
   );
