@@ -13,15 +13,11 @@ let fontData = fs.readFileSync(fontPath)
 export async function GET(req: NextRequest): Promise<Response> {
   const url = new URL(req.url);
   const fid = url.searchParams.get('fid');
-  const verifiedAddresses = await kv.get(fid as string);
-  let addressesList: string[] = [];
+  const verifiedAddresses: string[] | null = await kv.get(fid as string);
 
-  verifiedAddresses.forEach((address, index) => {
-    addressesList.push(<li key={index}>{address}</li>);
-  });
   const svg = await satori(
     <div style={{ marginTop: '200px', display: 'flex', flexDirection: 'column', color: "white" }}>Verified Addresses:
-      <ul>{addressesList}</ul>
+      <p>{(verifiedAddresses as string[]).join(", ")}</p>
     </div>
     ,
     {
