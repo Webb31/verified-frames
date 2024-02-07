@@ -73,11 +73,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           <meta property="og:image" content="${imageUrl}">
           <meta name="fc:frame" content="vNext">
           <meta name="fc:frame:image" content="${imageUrl}">
+          <meta name="fc:frame:button:1" content="Congrats, you're verified! Click to verify more addresses">
+          <meta name="fc:frame:button:1:action" content="post_redirect">
+          <meta name="fc:frame:post_url" content="https://coinbase.com/onchain-verify">
+
         </head>
-        <body>
-          <p>
-          </p>
-        </body>
       </html>
         `
     );

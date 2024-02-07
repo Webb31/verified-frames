@@ -2,7 +2,6 @@ import satori from "satori";
 import sharp from 'sharp';
 import * as fs from "fs";
 import { join } from 'path';
-import { v4 as uuidv4 } from 'uuid';
 import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
 
@@ -16,26 +15,24 @@ export async function GET(req: NextRequest): Promise<Response> {
   const verifiedAddresses: string[] | null = await kv.get(fid as string);
 
   const svg = await satori(
-    <div style={{ marginLeft: '200px', marginTop: '300px', display: 'flex', flexDirection: 'column', color: "white" }}>Verified Addresses:
+    <div style={{ marginLeft: '200px', marginTop: '200px', display: 'flex', flexDirection: 'column', color: "white" }}>Verified Addresses:
       <p>{(verifiedAddresses as string[]).join(", ")}</p>
     </div>
     ,
     {
-      width: 1000,
-      height: 1000,
+      width: 700,
+      height: 700,
       fonts: [
         {
           name: "Roboto",
-          // Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
           data: fontData,
-          weight: 700,
+          weight: 900,
           style: "normal",
         },
       ],
     },
   );
 
-  const randId = uuidv4();
   // Convert SVG to PNG using Sharp
   const pngBuffer = await sharp(Buffer.from(svg))
   .toFormat('png')
