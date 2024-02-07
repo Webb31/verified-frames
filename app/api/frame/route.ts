@@ -76,7 +76,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           <meta name="fc:frame:button:1" content="Congrats, you're verified! Click to verify more addresses">
           <meta name="fc:frame:button:1:action" content="post_redirect">
           <meta name="fc:frame:post_url" content="https://coinbase.com/onchain-verify">
-
         </head>
       </html>
         `

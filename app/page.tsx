@@ -4,7 +4,7 @@ import { NEXT_PUBLIC_URL } from "./config";
 
 const frameMetadata = getFrameMetadata({
   buttons: [{label: 'Check if I am verified by Coinbase'}],
-  image: `${NEXT_PUBLIC_URL}/attestation-circle.png`,
+  image: `${NEXT_PUBLIC_URL}/attestation-circle-wide.png`,
   post_url: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Test Verified Frame',
     description: 'LFG',
-    images: [`${NEXT_PUBLIC_URL}/attestation-circle.png`],
+    images: [`${NEXT_PUBLIC_URL}/attestation-circle-wide.png`],
   },
   other: {
     ...frameMetadata,
