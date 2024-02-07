@@ -1,17 +1,11 @@
 import { Attestation } from "@ethereum-attestation-service/eas-sdk";
-import { createPublicClient, http } from "viem";
-import { base } from "viem/chains";
 import { EAS_ATTESTATION_ABI } from "./easAbi";
+import { rpcClient } from "../rpcClient/client";
 
 const EASContractAddress = "0x4200000000000000000000000000000000000021"; // base-mainnet predeploy
 
 export function isValidAttestation(uid: string): Promise<boolean> {
-  const client = createPublicClient({
-    chain: base,
-    transport: http(),
-  });
-
-  return client
+  return rpcClient
     .readContract({
       address: EASContractAddress,
       abi: EAS_ATTESTATION_ABI,
