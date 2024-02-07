@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1>https://verified-frames-git-main-david-roth-cbs-projects.vercel.app/</h1>
+      <h1>https://verified-frames.vercel.app/</h1>
     </>
   );
 }
