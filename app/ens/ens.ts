@@ -1,7 +1,7 @@
 import { createPublicClient, http } from "viem";
 import { mainnet } from "viem/chains";
 
-const client = createPublicClient({
+export const rpcClient = createPublicClient({
   chain: mainnet,
   transport: http(),
 });
@@ -12,7 +12,7 @@ export async function getAddressesWithEns(
   const promises = addresses.map(async (address) => {
     let ensName: string | null = null;
     try {
-      ensName = await client.getEnsName({
+      ensName = await rpcClient.getEnsName({
         address: address as `0x${string}`,
       });
     } catch (err) {

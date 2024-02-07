@@ -4,6 +4,7 @@ import {
   getFrameHtmlResponse,
 } from "@coinbase/onchainkit";
 import { NextRequest, NextResponse } from "next/server";
+import { kv } from "@vercel/kv";
 import { NEXT_PUBLIC_URL } from "../../config";
 import { isValidAttestation } from "../../eas/eas";
 import { readAttestationUid } from "../../verifications/indexer";
@@ -48,23 +49,35 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     }
   }
 
+  const fid = message?.interactor.fid;
+  kv.set(`${fid}`, JSON.stringify(verifiedAddresses));
+
   // happy path: has at least 1 verified address
   if (verifiedAddresses.length > 0) {
     // convert verified addresses to ens names if an ens record exists
     getAddressesWithEns(verifiedAddresses).then((verifiedAddressesWithEns) => {
       verifiedAddresses = verifiedAddressesWithEns;
     });
+
+    const imageUrl = `${NEXT_PUBLIC_URL}/api/image?fid=${fid}`;
+
     return new NextResponse(
-      getFrameHtmlResponse({
-        buttons: [
-          {
-            label: `${verifiedAddresses.join(", ")}`,
-            action: "post_redirect",
-          },
-        ],
-        image: `${NEXT_PUBLIC_URL}/attestation-circle.png`,
-        post_url: `https://coinbase.com/onchain-verify`,
-      })
+      `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Verified Addresses</title>
+          <meta property="og:title" content="Verified Addresses">
+          <meta property="og:image" content="${imageUrl}">
+          <meta name="fc:frame" content="vNext">
+          <meta name="fc:frame:image" content="${imageUrl}">
+        </head>
+        <body>
+          <p>
+          </p>
+        </body>
+      </html>
+        `
     );
   }
 
