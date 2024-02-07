@@ -7,13 +7,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { NEXT_PUBLIC_URL } from "../../config";
 import { isValidAttestation } from "../../eas/eas";
 import { readAttestationUid } from "../../verifications/indexer";
+import { getAddressesWithEns } from "../../ens/ens";
 
 const zeroBytes32 =
   "0x0000000000000000000000000000000000000000000000000000000000000000";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   let accountAddresses: string[] | undefined = [];
-  let text: string | undefined = "";
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, {
@@ -24,9 +24,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     accountAddresses = message.interactor.verified_accounts;
   }
 
-  let attestationUids = [];
+  let verifiedAddresses: string[] = [];
   for (let i = 0; i < accountAddresses.length; i++) {
-    let uid;
+    // get the uid of the verified attestation associated with each address
+    let uid = zeroBytes32;
     try {
       uid = await readAttestationUid(accountAddresses[i]);
     } catch (err) {
@@ -34,37 +35,37 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     }
 
     if (uid != zeroBytes32) {
-      attestationUids.push(uid);
-    }
-  }
-
-  let isVerified = false;
-  if (attestationUids.length >= 0) {
-    for (let i = 0; i < attestationUids.length; i++) {
+      let isVerified = false;
+      // check that the attestation is valid
       try {
-        isVerified = await isValidAttestation(attestationUids[i] as string);
+        isVerified = await isValidAttestation(uid as string);
       } catch (err) {
         console.log(err);
       }
 
       if (isVerified) {
-        break;
+        verifiedAddresses.push(accountAddresses[i]);
       }
     }
   }
 
-  // happy path
-  if (isVerified) {
+  // happy path: has at least 1 verified address
+  if (verifiedAddresses.length > 0) {
+    // convert verified addresses to ens names if an ens record exists
+    getAddressesWithEns(verifiedAddresses).then((verifiedAddressesWithEns) => {
+      verifiedAddresses = verifiedAddressesWithEns;
+    });
+
     return new NextResponse(
       getFrameHtmlResponse({
         buttons: [
           {
-            label: `You are eligible! Claim your NFT now!`,
+            label: `Congrats! Your addresses are verified: ${verifiedAddresses.join(
+              ", "
+            )}`,
           },
         ],
         image: `${NEXT_PUBLIC_URL}/attestation-circle.png`,
-        // TODO: implement minting or some other gated experience
-        post_url: `${NEXT_PUBLIC_URL}/api/mint`,
       })
     );
   }
@@ -74,7 +75,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `You are not eligible. Click to verify now!`,
+          label: `You are not verified. Click here to verify now!`,
           action: "post_redirect",
         },
       ],
