@@ -87,7 +87,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `You are not verified. This way to verify now!🚀`,
+          label: `Your connected addresses are not verified. This way to verify now 🚀`,
           action: "post_redirect",
         },
       ],
