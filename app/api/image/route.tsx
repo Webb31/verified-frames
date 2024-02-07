@@ -26,7 +26,7 @@ export async function GET(req: NextRequest): Promise<Response> {
   const svg = await satori(
 <>
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-    <img src={`${NEXT_PUBLIC_URL}/attestation-circle.png`} alt="Attestation Circle" style={{ width: '300px', height: '300px', margin: '20px' }} />
+    <img src={`${NEXT_PUBLIC_URL}/attestation-circle.png`} alt="Attestation Circle" style={{ width: '275px', height: '275px', margin: '20px' }} />
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}> {/* This container will hold the header and list */}
       <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Verified Addresses</h2>
       <ul style={{ listStyleType: 'none', padding: '0', textAlign: 'center' }}>
