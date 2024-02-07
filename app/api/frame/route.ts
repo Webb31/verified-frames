@@ -56,11 +56,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     let resolvedAddresses: string[] = await getAddressesWithEns(
       verifiedAddresses
     ).then((verifiedAddressesWithEns) => {
+      console.log("verifiedAddressesWithEns ", verifiedAddressesWithEns);
       return verifiedAddressesWithEns;
     });
 
     const fid = message?.interactor.fid;
     kv.set(`${fid}`, JSON.stringify(resolvedAddresses));
+    console.log("resolved addresses ", resolvedAddresses);
 
     const imageUrl = `${NEXT_PUBLIC_URL}/api/image?fid=${fid}`;
 
