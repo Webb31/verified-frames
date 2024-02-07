@@ -23,7 +23,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (isValid) {
     accountAddresses = message.interactor.verified_accounts;
   }
-
   let verifiedAddresses: string[] = [];
   for (let i = 0; i < accountAddresses.length; i++) {
     // get the uid of the verified attestation associated with each address
@@ -51,6 +50,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   // happy path: has at least 1 verified address
   if (verifiedAddresses.length > 0) {
+    // convert verified addresses to ens names if an ens record exists
+    getAddressesWithEns(verifiedAddresses).then((verifiedAddressesWithEns) => {
+      verifiedAddresses = verifiedAddressesWithEns;
+    });
     return new NextResponse(
       getFrameHtmlResponse({
         buttons: [

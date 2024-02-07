@@ -1,11 +1,11 @@
 import { Attestation } from "@ethereum-attestation-service/eas-sdk";
 import { EAS_ATTESTATION_ABI } from "./easAbi";
-import { rpcClient } from "../rpcClient/client";
+import { baseRpcClient } from "../rpcClient/client";
 
 const EASContractAddress = "0x4200000000000000000000000000000000000021"; // base-mainnet predeploy
 
 export function isValidAttestation(uid: string): Promise<boolean> {
-  return rpcClient
+  return baseRpcClient
     .readContract({
       address: EASContractAddress,
       abi: EAS_ATTESTATION_ABI,

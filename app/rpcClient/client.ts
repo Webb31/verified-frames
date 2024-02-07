@@ -1,7 +1,7 @@
 import { createPublicClient, http } from "viem";
 import { base } from "viem/chains";
 
-export const rpcClient = createPublicClient({
+export const baseRpcClient = createPublicClient({
   chain: base,
   transport: http(),
 });
