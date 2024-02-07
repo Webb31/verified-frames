@@ -14,14 +14,10 @@ export async function GET(req: NextRequest): Promise<Response> {
   const url = new URL(req.url);
   const fid = url.searchParams.get('fid');
   let verifiedAddresses: string[] | null = await kv.get(fid as string);
-  verifiedAddresses = ["0xdc188480ff7e42efca205ba4001c2dc9395f2eb0"];
 
-  // if (verifiedAddresses === null || fid == null) {
-  //   return new NextResponse();
-  // }
-
-  // zero out fid in case user disconnects addresses
-  kv.del(fid as string)
+  if (verifiedAddresses === null || fid == null) {
+    return new NextResponse();
+  }
 
   const svg = await satori(
 <>
