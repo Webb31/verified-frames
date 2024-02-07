@@ -73,7 +73,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           <meta property="og:image" content="${imageUrl}">
           <meta name="fc:frame" content="vNext">
           <meta name="fc:frame:image" content="${imageUrl}">
-          <meta name="fc:frame:button:1" content="Congrats, you're verified! Click to verify more addresses">
+          <meta name="fc:frame:button:1" content="Congrats, you're verified! This way to verify more addresses🚀">
           <meta name="fc:frame:button:1:action" content="post_redirect">
           <meta name="fc:frame:post_url" content="https://coinbase.com/onchain-verify">
         </head>
@@ -87,11 +87,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `You are not verified. Click here to verify now!`,
+          label: `You are not verified. This way to verify now!🚀`,
           action: "post_redirect",
         },
       ],
-      image: `${NEXT_PUBLIC_URL}/attestation-circle.png`,
+      image: `${NEXT_PUBLIC_URL}/attestation-circle-grey.png`,
       post_url: `https://coinbase.com/onchain-verify`,
     })
   );

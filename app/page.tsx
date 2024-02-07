@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { NEXT_PUBLIC_URL } from "./config";
 
 const frameMetadata = getFrameMetadata({
-  buttons: [{label: 'Check if I am verified by Coinbase'}],
+  buttons: [{label: 'Check if my connected addresses are verified by Coinbase'}],
   image: `${NEXT_PUBLIC_URL}/attestation-circle-wide.png`,
   post_url: `${NEXT_PUBLIC_URL}/api/frame`,
 });
