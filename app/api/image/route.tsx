@@ -20,33 +20,32 @@ export async function GET(req: NextRequest): Promise<Response> {
   }
 
   const svg = await satori(
-<>
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-    <img src={`${NEXT_PUBLIC_URL}/attestation-circle.png`} alt="Attestation Circle" style={{ width: '275px', height: '275px', margin: '20px' }} />
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}> {/* This container will hold the header and list */}
-      <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Verified Addresses</h2>
-      <ul style={{ listStyleType: 'none', padding: '0', textAlign: 'center' }}>
-        {verifiedAddresses.map((a, index) => (
-          <li key={index} style={{
-            backgroundColor: 'transparent',
-            padding: '10px',
-            marginBottom: '10px',
-            borderRadius: '4px',
-            whiteSpace: 'nowrap',
-            overflow: 'visible',
-            textAlign: 'left',
-            display: 'block' // Make sure each list item is a block for proper text alignment
-          }}>
-            - {a.length == 42 ? `${a.slice(0, 6)}...${a.slice(37, 42)}` : a}
-          </li>
-        ))}
-      </ul>
+    <div style={{backgroundColor: 'white', display: 'flex'}}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <img src={`${NEXT_PUBLIC_URL}/attestation-circle.png`} alt="Attestation Circle" style={{ width: '220px', height: '220px', margin: '20px' }} />
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}> {/* This container will hold the header and list */}
+          <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Verified Addresses</h2>
+          <ul style={{ listStyleType: 'none', padding: '0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            {verifiedAddresses.map((a, index) => (
+              <li key={index} style={{
+                backgroundColor: 'transparent',
+                padding: '10px',
+                marginBottom: '1px',
+                borderRadius: '4px',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden', // Changed to 'hidden' to handle overflow text
+                textOverflow: 'ellipsis', // Add ellipsis for overflow text
+                textAlign: 'left',
+                display: 'block', // Ensure block display
+                maxWidth: '100%' // Ensure the width does not exceed the parent container
+              }}>
+                - {a.length === 42 ? `${a.slice(0, 6)}...${a.slice(-4)}` : a}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</>
-
-
-
     ,
     {
       width: 600,
