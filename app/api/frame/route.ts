@@ -24,9 +24,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     accountAddresses = message.interactor.verified_accounts;
   }
 
-  console.log("accounts: ", accountAddresses);
-  console.log("fid: ", message?.interactor.fid);
-
   let verifiedAddresses: string[] = [];
   for (let i = 0; i < accountAddresses.length; i++) {
     // get the uid of the verified attestation associated with each address
@@ -77,7 +74,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           <meta property="og:image" content="${imageUrl}">
           <meta name="fc:frame" content="vNext">
           <meta name="fc:frame:image" content="${imageUrl}">
-          <meta name="fc:frame:button:1" content="Congrats, you're verified! This way to verify more addresses 🚀">
+          <meta name="fc:frame:button:1" content="Congrats, you're verified! Verify more addresses 🚀">
           <meta name="fc:frame:button:1:action" content="post_redirect">
           <meta name="fc:frame:post_url" content="https://coinbase.com/onchain-verify">
         </head>
@@ -91,7 +88,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `Your connected addresses are not verified. This way to verify now 🚀`,
+          label: `Your connected addresses are not verified. Verify now 🚀`,
           action: "post_redirect",
         },
       ],
