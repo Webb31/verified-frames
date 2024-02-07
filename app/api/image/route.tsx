@@ -16,7 +16,7 @@ export async function GET(req: NextRequest): Promise<Response> {
   const verifiedAddresses: string[] | null = await kv.get(fid as string);
 
   const svg = await satori(
-    <div style={{ marginTop: '200px', display: 'flex', flexDirection: 'column', color: "white" }}>Verified Addresses:
+    <div style={{ marginLeft: '200px', marginTop: '300px', display: 'flex', flexDirection: 'column', color: "white" }}>Verified Addresses:
       <p>{(verifiedAddresses as string[]).join(", ")}</p>
     </div>
     ,
