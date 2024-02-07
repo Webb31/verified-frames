@@ -23,6 +23,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (isValid) {
     accountAddresses = message.interactor.verified_accounts;
   }
+
+  console.log("accounts: ", accountAddresses);
+  console.log("fid: ", message?.interactor.fid);
+
   let verifiedAddresses: string[] = [];
   for (let i = 0; i < accountAddresses.length; i++) {
     // get the uid of the verified attestation associated with each address
