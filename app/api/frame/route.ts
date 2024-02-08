@@ -24,6 +24,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     accountAddresses = message.interactor.verified_accounts;
   }
 
+  console.log("accountAddresses", accountAddresses);
+
   let verifiedAddresses: string[] = [];
   for (let i = 0; i < accountAddresses.length; i++) {
     // get the uid of the verified attestation associated with each address
@@ -92,7 +94,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           action: "post_redirect",
         },
       ],
-      image: `${NEXT_PUBLIC_URL}/attestation-circle-white.png`,
+      image: `${NEXT_PUBLIC_URL}/attestation-circle-grey-white.png`,
       post_url: `https://coinbase.com/onchain-verify`,
     })
   );
