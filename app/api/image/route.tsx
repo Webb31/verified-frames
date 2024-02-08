@@ -20,10 +20,14 @@ export async function GET(req: NextRequest): Promise<Response> {
   }
 
   const svg = await satori(
-    <div style={{backgroundColor: 'white', display: 'flex'}}>
+    <div style={{backgroundColor: 'white', display: 'flex', justifyContent: 'center', width: '100vw', overflowX: 'auto' }}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <img src={`${NEXT_PUBLIC_URL}/attestation-circle.png`} alt="Attestation Circle" style={{ width: '220px', height: '220px', margin: '20px' }} />
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}> {/* This container will hold the header and list */}
+        <img
+          src={`${NEXT_PUBLIC_URL}/attestation-circle.png`}
+          alt="Attestation Circle"
+          style={{ width: '220px', height: '220px', margin: '20px' }}
+        />
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Verified Addresses</h2>
           <ul style={{ listStyleType: 'none', padding: '0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             {verifiedAddresses.map((a, index) => (

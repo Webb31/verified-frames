@@ -92,7 +92,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           action: "post_redirect",
         },
       ],
-      image: `${NEXT_PUBLIC_URL}/attestation-circle-grey.png`,
+      image: `${NEXT_PUBLIC_URL}/attestation-circle-white.png`,
       post_url: `https://coinbase.com/onchain-verify`,
     })
   );
