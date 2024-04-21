@@ -8,7 +8,7 @@ const frameMetadata = getFrameMetadata({
     action: 'post_redirect',
     label: 'Open Link',
   }],
-  image: `/brian.gif`,
+  image: `https://drive.google.com/file/d/1kT0BjVmsI_HDGqKgSIhDZ0nAaP06B72t`,
   post_url: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
