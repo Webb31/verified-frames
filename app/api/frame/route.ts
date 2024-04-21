@@ -24,7 +24,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   let uid = "0xea40915a79a6c699658e225db836ce2cbe09f55aa22e0e4b0e64377bdd78b6ae";    // replaced with demo attesation uid
 
   // happy path: has at least 1 verified address
-  if (isVerified = await isValidAttestation(uid as string)) {
+  if (await isValidAttestation(uid as string)) {
     return new NextResponse(
       `
       <!DOCTYPE html>
