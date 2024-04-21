@@ -3,14 +3,16 @@ import type { Metadata } from 'next';
 import { NEXT_PUBLIC_URL } from "./config";
 
 const frameMetadata = getFrameMetadata({
-  buttons: [{label: 'Verify'},
+  buttons: [{
+    label: 'Verify',
+    post_url: `${NEXT_PUBLIC_URL}/api/frame`,
+  },
   {
     action: 'post_redirect',
     label: 'Open Link',
-    target: `https://youtu.be/LRVJRXMAp2g?si=yAzlPNlZzghNlQlw`,
+    post_url: `https://youtu.be/LRVJRXMAp2g?si=yAzlPNlZzghNlQlw`,
   }],
   image: `https://zd56xv.csb.app/Base_Warpcast_files/CryptoMakesMoneyFasterWhyCryptowithBrianArmstrong.gif`,
-  post_url: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
 export const metadata: Metadata = {
