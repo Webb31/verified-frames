@@ -20,36 +20,38 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     neynarApiKey: process.env.NEYNAR_API_KEY as string,
   });
 
-  if (isValid) {
+/*   if (isValid) {
     accountAddresses = message.interactor.verified_accounts;
   }
 
-  console.log("accountAddresses", accountAddresses);
+  console.log("accountAddresses", accountAddresses); */
 
   let verifiedAddresses: string[] = [];
-  for (let i = 0; i < accountAddresses.length; i++) {
-    // get the uid of the verified attestation associated with each address
-    let uid = zeroBytes32;
+  
+  // get the uid of the verified attestation
+  let uid = zeroBytes32;
+  try {
+//    uid = await readAttestationUid(accountAddresses[i]);
+    uid = "0xea40915a79a6c699658e225db836ce2cbe09f55aa22e0e4b0e64377bdd78b6ae";    // replaced with demo attesation uid
+  } catch (err) {
+    console.log(err);
+  }
+
+  if (uid != zeroBytes32) {
+    let isVerified = false;
+    // check that the attestation is valid
     try {
-      uid = await readAttestationUid(accountAddresses[i]);
+      isVerified = await isValidAttestation(uid as string);
     } catch (err) {
       console.log(err);
     }
 
-    if (uid != zeroBytes32) {
-      let isVerified = false;
-      // check that the attestation is valid
-      try {
-        isVerified = await isValidAttestation(uid as string);
-      } catch (err) {
-        console.log(err);
-      }
-
-      if (isVerified) {
-        verifiedAddresses.push(accountAddresses[i]);
-      }
+    if (isVerified) {
+//      verifiedAddresses.push(accountAddresses[i]);
+      verifiedAddresses.push("0x596b8eeDe78d360c9484f715919038F3d27fc8Df"); // replaced with demo address
     }
   }
+  
 
   // happy path: has at least 1 verified address
   if (verifiedAddresses.length > 0) {
