@@ -23,18 +23,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   // get the uid of the verified attestation
   let uid = "0xea40915a79a6c699658e225db836ce2cbe09f55aa22e0e4b0e64377bdd78b6ae";    // replaced with demo attesation uid
 
-  if (uid != zeroBytes32) {
-    let isVerified = false;
-    // check that the attestation is valid
-    try {
-      isVerified = await isValidAttestation(uid as string);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   // happy path: has at least 1 verified address
-  if isVerified {
+  if (isVerified = await isValidAttestation(uid as string);) {
     return new NextResponse(
       `
       <!DOCTYPE html>
