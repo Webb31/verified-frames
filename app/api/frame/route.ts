@@ -21,7 +21,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   });
   
   // get the uid of the verified attestation
-  uid = "0xea40915a79a6c699658e225db836ce2cbe09f55aa22e0e4b0e64377bdd78b6ae";    // replaced with demo attesation uid
+  let uid = "0xea40915a79a6c699658e225db836ce2cbe09f55aa22e0e4b0e64377bdd78b6ae";    // replaced with demo attesation uid
 
   if (uid != zeroBytes32) {
     let isVerified = false;
