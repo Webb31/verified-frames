@@ -3,9 +3,8 @@ import type { Metadata } from 'next';
 import { NEXT_PUBLIC_URL } from "./config";
 
 const frameMetadata = getFrameMetadata({
-  buttons: [{label: 'Check attestation'},
+  buttons: [{label: 'Verify'},
   {
-    action: 'link',
     label: 'Open Link',
     target: `https://youtu.be/LRVJRXMAp2g?si=yAzlPNlZzghNlQlw`,
   }],
