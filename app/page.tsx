@@ -5,6 +5,7 @@ import { NEXT_PUBLIC_URL } from "./config";
 const frameMetadata = getFrameMetadata({
   buttons: [{label: 'Verify'},
   {
+    action: 'post_redirect',
     label: 'Open Link',
     target: `https://youtu.be/LRVJRXMAp2g?si=yAzlPNlZzghNlQlw`,
   }],
