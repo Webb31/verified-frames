@@ -34,7 +34,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   // happy path: has at least 1 verified address
-  if (isVerified) {
+  if isVerified {
     return new NextResponse(
       `
       <!DOCTYPE html>
