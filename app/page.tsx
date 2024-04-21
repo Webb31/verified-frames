@@ -8,7 +8,7 @@ const frameMetadata = getFrameMetadata({
     action: 'post_redirect',
     label: 'Open Link',
   }],
-  image: `brian.gif`,
+  image: `${NEXT_PUBLIC_URL}/brian.gif`,
   post_url: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
