@@ -35,7 +35,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           <meta property="og:image" content="https://zd56xv.csb.app/Base_Warpcast_files/CryptoMakesMoneyFasterWhyCryptowithBrianArmstrong.gif">
           <meta name="fc:frame" content="vNext">
           <meta name="fc:frame:image" content="https://zd56xv.csb.app/Base_Warpcast_files/CryptoMakesMoneyFasterWhyCryptowithBrianArmstrong.gif">
-          <meta name="fc:frame:button:1" content="Open Link to Attested Content">
+          <meta name="fc:frame:button:1" content="Open Attested Content">
           <meta name="fc:frame:button:1:action" content="post_redirect">
           <meta name="fc:frame:post_url" content="https://youtu.be/LRVJRXMAp2g?si=yAzlPNlZzghNlQlw">
         </head>

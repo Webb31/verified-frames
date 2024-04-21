@@ -8,7 +8,7 @@ const frameMetadata = getFrameMetadata({
     action: 'post_redirect',
     label: 'Open Link',
   }],
-  image: `https://zd56xv.csb.app/Base_Warpcast_files/CryptoMakesMoneyFasterWhyCryptowithBrianArmstrong.gif`,
+  image: `brian.gif`,
   post_url: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
