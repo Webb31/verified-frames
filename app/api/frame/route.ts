@@ -30,14 +30,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Verified Addresses</title>
-          <meta property="og:title" content="Verified Addresses">
+          <title>Attested Content</title>
+          <meta property="og:title" content="Attested Content">
           <meta property="og:image" content="https://zd56xv.csb.app/Base_Warpcast_files/CryptoMakesMoneyFasterWhyCryptowithBrianArmstrong.gif">
           <meta name="fc:frame" content="vNext">
           <meta name="fc:frame:image" content="https://zd56xv.csb.app/Base_Warpcast_files/CryptoMakesMoneyFasterWhyCryptowithBrianArmstrong.gif">
-          <meta name="fc:frame:button:1" content="Congrats, you're verified! Verify more addresses 🚀">
+          <meta name="fc:frame:button:1" content="Open Link to Attested Content">
           <meta name="fc:frame:button:1:action" content="post_redirect">
-          <meta name="fc:frame:post_url" content="https://coinbase.com/onchain-verify">
+          <meta name="fc:frame:post_url" content="https://youtu.be/LRVJRXMAp2g?si=yAzlPNlZzghNlQlw">
         </head>
       </html>
         `
@@ -49,12 +49,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `Your connected addresses are not verified. Verify now 🚀`,
+          label: `Your content is not attested.`,
           action: "post_redirect",
         },
       ],
       image: `${NEXT_PUBLIC_URL}/attestation-circle-grey-white.png`,
-      post_url: `https://coinbase.com/onchain-verify`,
+      post_url: `https://base-sepolia.easscan.org/schema/view/0x67f4ef704a08dfb74df8d9191b059ac9515fb5f8ffe83529a342958397fa732c`,
     })
   );
 }
